@@ -19,9 +19,21 @@ if not loader.context.is_logged_in:
     except TwoFactorAuthRequiredException:
         loader.two_factor_login(input('Code: '))
     loader.save_session_to_file(f'session-{USER}')
+if loader.context.is_logged_in:
+    loader.context.log('Logged in.', end='\n' * 2)
 
-profile = Profile.from_username(loader.context, USER)
-followers = profile.get_followers()
-followees = profile.get_followees()
 
-print(set(followees).difference(set(followers)))
+def get_unfollowers(user) -> list:
+    loader.context.log('Getting list of accounts i\'m subscribed to but not subscribed to me:')
+    profile = Profile.from_username(loader.context, user)
+    followers = profile.get_followers()
+    followees = profile.get_followees()
+    unfollowers = set(followees).difference(set(followers))
+    unfollowers_list = []
+    for unfollower in unfollowers:
+        unfollowers_list.append(f'{unfollower.full_name} @{unfollower.username}')
+    return unfollowers_list
+
+
+if __name__ == '__main__':
+    print('\t', *get_unfollowers(USER), sep='\n\t')
