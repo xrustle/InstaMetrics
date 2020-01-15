@@ -23,16 +23,7 @@ if loader.context.is_logged_in:
     loader.context.log('Logged in.', end='\n' * 2)
 
 
-def get_unfollowers(user) -> list:
-    loader.context.log('Getting list of accounts i\'m subscribed to but not subscribed to me:')
-    profile = Profile.from_username(loader.context, user)
-    followers = profile.get_followers()
-    followees = profile.get_followees()
-    unfollowers = set(followees).difference(set(followers))
-    unfollowers_list = []
-    for unfollower in unfollowers:
-        unfollowers_list.append(f'{unfollower.full_name} @{unfollower.username}')
-    return unfollowers_list
+
 
 
 if __name__ == '__main__':
