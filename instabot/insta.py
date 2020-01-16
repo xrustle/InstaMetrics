@@ -18,7 +18,7 @@ class insta:
         if self.loader.context.is_logged_in:
             self.loader.context.log('Logged in.', end='\n' * 2)
 
-    def get_unfollowers(self, user) -> list:
+    def get_unfollowers(self, user):
         self.loader.context.log('Getting list of accounts i\'m subscribed to but not subscribed to me:')
         profile = Profile.from_username(self.loader.context, user)
 
@@ -31,4 +31,4 @@ class insta:
         for unfollower in unfollowers:
             unfollowers_list.append(f'{unfollower.full_name} @{unfollower.username}')
 
-        return unfollowers_list
+        return '\n'.join(unfollowers_list)
