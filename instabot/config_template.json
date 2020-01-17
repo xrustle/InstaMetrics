@@ -1,0 +1,22 @@
+{
+    "credentials": {
+        "username": "your_username",
+        "password": "your_password"
+    },
+    "id": "<int> your telegram id",
+    "token": "bot_token",
+    "proxy": {
+        "https": "socks5://login:pass@host:port"
+    },
+    "mongo": {
+        "uri": {
+            "host": "mongo db host",
+            "port": 27017
+        },
+        "db": "telegram"
+    },
+    "api": {
+        "api_id": "you_personal_api_id",
+        "api_hash": "your_personal_api_hash"
+    }
+}
