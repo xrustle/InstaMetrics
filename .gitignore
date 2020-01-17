@@ -170,5 +170,5 @@ config.rst
 
 package-lock.json
 geckodriver.log
-config.json
+instabot/config.json
 session-*

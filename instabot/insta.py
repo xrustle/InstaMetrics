@@ -2,7 +2,7 @@ from instaloader import Instaloader, Profile, TwoFactorAuthRequiredException
 from instabot.config import *
 
 
-class insta:
+class Insta:
     def __init__(self):
         self.loader = Instaloader()
         try:
@@ -13,7 +13,7 @@ class insta:
             try:
                 self.loader.login(USER, PASSWORD)
             except TwoFactorAuthRequiredException:
-                self.loader.twgio_factor_login(input('Code: '))
+                self.loader.two_factor_login(input('Code: '))
             self.loader.save_session_to_file(f'session-{USER}')
         if self.loader.context.is_logged_in:
             self.loader.context.log('Logged in.', end='\n' * 2)
