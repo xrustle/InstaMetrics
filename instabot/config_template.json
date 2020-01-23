@@ -8,6 +8,7 @@
     "proxy": {
         "https": "socks5://login:pass@host:port"
     },
+    "mtproto": ["hostname", 443, "secret"],
     "mongo": {
         "uri": {
             "host": "mongo db host",

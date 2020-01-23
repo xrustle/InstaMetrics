@@ -1,5 +1,6 @@
 from instabot.config import API, MTPROTO
-from telethon import TelegramClient, connection
+from telethon import TelegramClient, sync, connection
+from telethon.errors import SessionPasswordNeededError
 import logging
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
@@ -10,7 +11,18 @@ client = TelegramClient(
     connection=connection.ConnectionTcpMTProxyRandomizedIntermediate,
     proxy=tuple(MTPROTO)
 )
+client.connect()
+if not client.is_user_authorized():
+    phone = input('Phone: ')
+    try:
+        client.send_code_request(phone)
+        me = client.sign_in(phone, input('Code: '))
+    except SessionPasswordNeededError:
+        password = input('Password: ')
+        me = client.start(phone, password)
 
+myself = client.get_me()
+print(myself)
 
 async def main():
     # Getting information about yourself
